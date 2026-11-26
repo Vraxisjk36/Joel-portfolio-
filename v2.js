@@ -4,7 +4,7 @@
 const q=(s,r=document)=>r.querySelector(s), qa=(s,r=document)=>[...r.querySelectorAll(s)];
 const motion=matchMedia('(prefers-reduced-motion: reduce)');
 const canvas=q('#kinetic-object'), hero=q('#home');
-if(canvas && hero){
+if(canvas && hero && !document.querySelector('script[src^="identity.js"]')){
  const ctx=canvas.getContext('2d');
  if(ctx){
  let w=1,h=1,dpr=1,raf=0,visible=true,tx=0,ty=0,px=0,py=0,time=0,last=0;
