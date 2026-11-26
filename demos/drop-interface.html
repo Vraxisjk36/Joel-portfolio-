@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRAXIS — Send anything. Leave nothing.</title>
+    <!-- Tailwind CSS & Lucide Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --paper: oklch(0.975 0.012 80);
+        --ink: oklch(0.16 0.01 60);
+        --ember: oklch(0.62 0.22 27);
+        --border: oklch(0.16 0.01 60 / 0.1);
+      }
+      body {
+        background-color: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+      }
+      .font-display {
+        font-family: "Instrument Serif", serif;
+      }
+      .font-mono {
+        font-family: "Geist Mono", monospace;
+      }
+      .italic-serif {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+      }
+      .text-ember {
+        color: var(--ember);
+      }
+      .bg-ember {
+        background-color: var(--ember);
+      }
+      .surface {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 1.5rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border);
+        font-family: "Geist Mono";
+        font-size: 0.7rem;
+        text-transform: uppercase;
+      }
+
+      .nav-glass {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      }
+
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-rise {
+        animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+    </style>
+</head>
+<body class="selection:bg-[var(--ember)] selection:text-white pb-32">
+    <!-- TOP NAV -->
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center animate-rise">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-ember rounded-full"></div>
+        <span class="font-display text-2xl">vraxisdrop</span>
+      </div>
+      <div class="hidden md:flex gap-8 text-sm font-medium opacity-60">
+        <a href="#" class="opacity-100">Drop</a>
+        <a href="#">Retrieve</a>
+        <a href="#">Activity</a>
+        <a href="#">Journal</a>
+        <a href="#">About</a>
+      </div>
+      <button class="text-sm font-mono uppercase tracking-tighter" onclick="location.href='/'">
+        New drop ↗
+      </button>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <!-- HERO -->
+      <section class="pt-16 md:pt-24 pb-12 md:pb-20">
+        <div class="animate-rise">
+          <span class="pill">
+            <span class="w-1.5 h-1.5 rounded-full bg-ember animate-pulse"></span>
+            Original interface preview
+          </span>
+        </div>
+        <h1 class="mt-6 font-display text-[clamp(3rem,9vw,8rem)] leading-[0.9] animate-rise" style="animation-delay: 0.1s">
+          Send anything.<br />
+          <span class="italic-serif text-ember">Leave nothing.</span>
+        </h1>
+        <p class="mt-8 max-w-xl text-lg opacity-60 animate-rise" style="animation-delay: 0.2s">
+          Vraxis Drop is a quiet, ephemeral channel between your devices and the people you trust. Drop a payload, share a code or QR, and watch it vanish on its own terms.
+        </p>
+      </section>
+
+      <!-- AD SLOT -->
+      
+
+     <!-- Inside index.html - replace the main composer section -->
+<section class="lg:col-span-8 surface shadow-sm overflow-hidden animate-rise flex flex-col h-full">
+    <form action="#" method="POST" class="flex flex-col h-full">
+        <!-- Header stays at top -->
+        <div class="px-6 py-4 border-b border-black/5 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-ember animate-pulse"></div>
+                <span class="font-mono text-[10px] uppercase tracking-widest opacity-40">Composing drop</span>
+            </div>
+            <div id="char-count" class="font-mono text-[10px] opacity-40">0 chars</div>
+        </div>
+
+        <!-- Textarea expands to fill space but respects bottom actions -->
+        <div class="p-6 md:p-10 flex flex-col flex-1">
+            <textarea
+                name="content"
+                id="payload"
+                placeholder="Type, paste, dictate…"
+                class="w-full flex-1 min-h-[200px] bg-transparent border-0 font-display text-2xl md:text-3xl focus:outline-none resize-none leading-snug"
+                required
+            ></textarea>
+
+            <!-- THUMB ZONE: Expiry and Button moved closer together -->
+            <div class="mt-auto pt-6">
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <!-- Larger Touch Targets for Radio Buttons (44px min height) -->
+                    <label class="flex-1 min-w-[80px]">
+                        <input type="radio" name="expiry" value="1h" class="hidden peer">
+                        <div class="peer-checked:bg-black peer-checked:text-white border border-black/10 rounded-xl py-3 text-center text-[10px] font-mono uppercase transition-all active:scale-95">1H</div>
+                    </label>
+                    <label class="flex-1 min-w-[80px]">
+                        <input type="radio" name="expiry" value="24h" class="hidden peer" checked>
+                        <div class="peer-checked:bg-black peer-checked:text-white border border-black/10 rounded-xl py-3 text-center text-[10px] font-mono uppercase transition-all active:scale-95">24H</div>
+                    </label>
+                    <label class="flex-1 min-w-[80px]">
+                        <input type="radio" name="expiry" value="7d" class="hidden peer">
+                        <div class="peer-checked:bg-black peer-checked:text-white border border-black/10 rounded-xl py-3 text-center text-[10px] font-mono uppercase transition-all active:scale-95">7D</div>
+                    </label>
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full group flex items-center justify-center gap-2 px-8 py-5 bg-black text-white rounded-2xl font-medium transition-all active:scale-95 shadow-lg"
+                >
+                    Release drop
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </button>
+                <p class="text-center text-[9px] font-mono opacity-30 mt-4 uppercase tracking-widest">
+                    Interface preview · no transfers
+                </p>
+            </div>
+        </div>
+    </form>
+</section>
+
+</div><script>document.addEventListener("submit",e=>e.preventDefault());document.querySelectorAll("a,button").forEach(x=>{x.removeAttribute("onclick");x.addEventListener("click",e=>e.preventDefault())});if(window.lucide)lucide.createIcons();</script></body></html>
