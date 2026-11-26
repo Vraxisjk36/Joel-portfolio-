@@ -14,7 +14,7 @@ if(canvas && hero){
   const scale=Math.min(w*.27,h*.45),cx=w*(w>800?.61:.54)+px*18,cy=h*.48+py*15;
   const a=t*.00035+px*.22,b=.46+Math.sin(t*.00028)*.2+py*.18;
   const ca=Math.cos(a),sa=Math.sin(a),cb=Math.cos(b),sb=Math.sin(b);
-  const mesh=[], count=42, steps=96;
+  const mesh=[], count=innerWidth<700?25:38, steps=innerWidth<700?56:84;
   for(let i=0;i<count;i++){
    const u=i/count*Math.PI*2,points=[];
    for(let j=0;j<=steps;j++){
@@ -49,7 +49,7 @@ if(canvas && hero){
   for(let k=0;k<3;k++){ctx.beginPath();ctx.ellipse(cx,cy,scale*(1.18+k*.075),scale*(.35+k*.035),-.45+k*.35,0,Math.PI*2);ctx.stroke()}
   ctx.fillStyle='#b4b8ac';ctx.font='10px monospace';ctx.fillText('FIG. 01',cx-scale,cy+scale*1.2);ctx.fillStyle='#d5f59e';ctx.fillRect(cx+scale*.96,cy-scale*.98,3,3);
  }
- function loop(now){raf=0;if(!visible||motion.matches||document.hidden)return;if(now-last>30){time+=Math.min(now-last,60);last=now;draw(time)}raf=requestAnimationFrame(loop)}
+ function loop(now){raf=0;if(!visible||motion.matches||document.hidden)return;if(now-last>(innerWidth<700?41:30)){time+=Math.min(now-last,60);last=now;draw(time)}raf=requestAnimationFrame(loop)}
  function sync(){if(!visible||motion.matches||document.hidden){if(raf)cancelAnimationFrame(raf);raf=0;if(motion.matches)draw(0);return}if(!raf){last=performance.now();raf=requestAnimationFrame(loop)}}
  hero.addEventListener('pointermove',e=>{const b=hero.getBoundingClientRect();tx=(e.clientX-b.left)/b.width-.5;ty=(e.clientY-b.top)/b.height-.5},{passive:true});
  hero.addEventListener('pointerleave',()=>{tx=ty=0});
@@ -77,13 +77,10 @@ if(track&&index){
   const p=document.createElement('p');p.className='project-description';p.textContent=descriptions[key]||'';caption.append(p);
   const label=document.createElement('span');label.className='case-label';label.textContent='OPEN CASE STUDY ↗';caption.append(label);
   const b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0')+' / '+q('h3',card).textContent;b.setAttribute('aria-current','false');
-  b.addEventListener('click',()=>track.scrollTo({left:card.offsetLeft-track.firstElementChild.offsetLeft+track.scrollLeft-(card.getBoundingClientRect().left-track.getBoundingClientRect().left) + (card.getBoundingClientRect().left-track.getBoundingClientRect().left),behavior:motion.matches?'auto':'smooth'}));
-  // Use viewport-relative position, including after category filtering.
-  b.onclick=()=>{track.scrollTo({left:track.scrollLeft+card.getBoundingClientRect().left-track.getBoundingClientRect().left-3,behavior:motion.matches?'auto':'smooth'})};
+  b.addEventListener('click',()=>track.scrollTo({left:track.scrollLeft+card.getBoundingClientRect().left-track.getBoundingClientRect().left-3,behavior:motion.matches?'auto':'smooth'}));
   index.append(b);buttons.push(b);
  }
- // Replace redundant click handlers with a single precise navigation function.
- buttons.forEach((b,i)=>{const copy=b.cloneNode(true);b.replaceWith(copy);copy.addEventListener('click',()=>{const card=cards[i];track.scrollTo({left:track.scrollLeft+card.getBoundingClientRect().left-track.getBoundingClientRect().left-3,behavior:motion.matches?'auto':'smooth'})});buttons[i]=copy});
+
  let current=-1,scheduled=false;
  function update(){scheduled=false;let best=Infinity,active=-1;const left=track.getBoundingClientRect().left;cards.forEach((c,i)=>{buttons[i].hidden=c.hidden;if(c.hidden)return;const dist=Math.abs(c.getBoundingClientRect().left-left);if(dist<best){best=dist;active=i}});if(active<0)return;buttons.forEach((b,i)=>b.setAttribute('aria-current',String(i===active)));
  if(current!==active){current=active;const key=q('[data-project]',cards[active]).dataset.project;preview.replaceChildren();const label=document.createElement('span');label.textContent='PROJECT '+String(active+1).padStart(2,'0')+' / 07';preview.append(label);if(demos[key]){const a=document.createElement('a');a.href=demos[key][1];a.textContent=demos[key][0]+' ↗';a.target='_blank';a.rel='noopener';preview.append(a)}else{const b=document.createElement('span');b.textContent='Details in case study';preview.append(b)}}}
