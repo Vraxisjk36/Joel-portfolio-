@@ -1,0 +1,68 @@
+/* V2.2 — visual storytelling inside the existing V2 sections */
+.visual-career,.visual-toolkit,.visual-process{margin-top:24px}
+.career-stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);min-height:370px;border-top:1px solid #51554c;border-bottom:1px solid #51554c;gap:clamp(20px,5vw,76px);align-items:stretch}
+.career-art{position:relative;background:#181c18;overflow:hidden;min-height:300px;display:grid;place-items:center;isolation:isolate}
+.career-art svg{display:block;width:100%;height:100%;max-height:420px}
+.career-art .art-index{position:absolute;top:14px;left:17px;font:10px var(--mono);color:#b0b4a7;z-index:2}
+.career-art .art-caption{position:absolute;bottom:12px;right:15px;font:10px var(--mono);color:#a6aa9f;z-index:2}
+.career-art.change svg{animation:career-mask .65s cubic-bezier(.22,.75,.2,1) both}
+@keyframes career-mask{from{clip-path:inset(0 100% 0 0);opacity:.35}to{clip-path:inset(0);opacity:1}}
+.career-art .signal{stroke-dasharray:8 12;animation:signal-flow 1.8s linear infinite;animation-play-state:paused}
+.career-art .pulse{transform-box:fill-box;transform-origin:center;animation:node-pulse 2.3s ease-in-out infinite;animation-play-state:paused}
+.career-art.is-visible .signal,.career-art.is-visible .pulse{animation-play-state:running}
+@keyframes signal-flow{to{stroke-dashoffset:-40}}
+@keyframes node-pulse{0%,100%{opacity:.45;transform:scale(.8)}50%{opacity:1;transform:scale(1.18)}}
+.career-details{display:flex;flex-direction:column;justify-content:center;padding:24px 15px 24px 0}
+.career-details .career-date{font:11px var(--mono);color:#b6b9ad}
+.career-details h3{font-size:clamp(33px,4.7vw,72px);line-height:.95;letter-spacing:-.065em;font-weight:550;margin:16px 0 7px}
+.career-details .career-role{font-size:16px;color:var(--muted)}
+.career-tags{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:24px 0 20px}
+.career-tags span{border-top:1px solid #454a40;padding:12px 8px 9px 0;font-size:13px}
+.career-details .career-extra{font-size:13px;color:#bfc1b7;line-height:1.6}
+.career-select{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid #454a40}
+.career-select button{position:relative;text-align:left;display:flex;flex-direction:column;gap:6px;background:none;border:0;border-right:1px solid #454a40;color:var(--muted);padding:16px 13px 14px;min-width:0;transition:color .25s,background .25s}
+.career-select button:last-child{border-right:0}.career-select button[aria-selected=true]{color:var(--ink);background:#ffffff06}
+.career-select button[aria-selected=true]:before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent)}
+.career-select button strong{font-size:clamp(12px,1.8vw,19px);font-weight:500;line-height:1.15;overflow-wrap:anywhere}.career-select button small{font:10px var(--mono)}
+.toolkit-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(20px,5vw,70px);align-items:stretch}
+.toolkit-visual{position:relative;min-height:355px;display:grid;place-items:center;overflow:hidden;background:#111411;border:1px solid #44493f;isolation:isolate}
+.toolkit-visual svg{width:100%;height:auto;max-height:420px;display:block}
+.toolkit-visual .orbit{transform-origin:220px 180px;animation:orbit-spin 24s linear infinite;animation-play-state:paused}
+.toolkit-visual .orbit.reverse{animation-direction:reverse;animation-duration:32s}
+.toolkit-visual.is-visible .orbit{animation-play-state:running}
+@keyframes orbit-spin{to{transform:rotate(360deg)}}
+.toolkit-visual .tech-core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;gap:8px;text-align:center}
+.tech-core strong{font-size:clamp(36px,5vw,74px);letter-spacing:-.075em;line-height:1;font-weight:600}
+.tech-core small{font:10px var(--mono);color:#a9b0a2}
+.toolkit-selector{min-width:0;display:flex;flex-direction:column}
+.toolkit-tabs{display:flex;gap:0;border-bottom:1px solid #4c5146;overflow-x:auto;scrollbar-width:none}
+.toolkit-tabs button{background:none;border:0;color:var(--muted);padding:12px 13px;white-space:nowrap;font-size:12px;position:relative}
+.toolkit-tabs button[aria-selected=true]{color:var(--ink)}
+.toolkit-tabs button[aria-selected=true]:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent)}
+.tech-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:17px 0}
+.tech-list button{border:1px solid #454b40;background:#141814;color:#c9ccc1;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:14px;text-align:left;padding:12px;min-height:78px;min-width:0;transition:background .25s,color .25s,border-color .25s}
+.tech-list button[aria-pressed=true]{background:#d5f59e;color:#111;border-color:#d5f59e}
+.tech-list button:hover:not([aria-pressed=true]){border-color:#a4b098}
+.tech-list button b{font:600 19px/1 var(--mono);letter-spacing:-.08em}.tech-list button span{font-size:11px;line-height:1.15;overflow-wrap:anywhere}
+.tech-evidence{border-top:1px solid #454b40;padding:16px 0 0;margin-top:auto;min-height:105px}
+.tech-evidence h3{font-size:21px;letter-spacing:-.045em;margin-bottom:5px}
+.tech-evidence p{font-size:13px;color:#b8bdb0;line-height:1.55}
+.tech-projects{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tech-projects button{font-size:12px;background:none;border:0;border-bottom:1px solid #78836b;padding:3px 0;color:var(--ink)}
+.visual-process{margin-top:65px;border-top:1px solid #454b40;padding-top:18px}
+.visual-process .process-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.process-head h3{font-size:clamp(25px,4vw,48px);letter-spacing:-.06em;font-weight:500}
+.process-head small{color:var(--muted);font:11px var(--mono)}
+.process-rail{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.process-rail:before{content:"";position:absolute;top:27px;left:12%;right:12%;height:1px;background:#4b5246}
+.process-rail button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0;padding:0;border:0;background:none;color:#aeb5a7;font-size:13px}
+.process-rail button .process-symbol{width:55px;height:55px;border:1px solid #5b6553;background:#181c17;display:grid;place-items:center;font:23px var(--mono);transition:background .3s,color .3s,transform .3s}
+.process-rail button[aria-pressed=true]{color:var(--ink)}
+.process-rail button[aria-pressed=true] .process-symbol{background:var(--accent);color:#181b16;transform:rotate(-6deg)}
+.process-description{padding:20px 0 0;text-align:center;color:#c0c5b8;font-size:14px;min-height:65px;max-width:500px;margin:auto}
+.visual-process .process-description.change{animation:process-in .45s both}@keyframes process-in{from{opacity:.15;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.enhanced-experience>.experience-row,.enhanced-toolkit>.skill-row,.enhanced-toolkit>.process{display:none}
+.wow-heading h2{transform:translateY(var(--heading-shift,0px));will-change:transform}
+.wow-quote{position:relative;overflow:hidden}.wow-quote .quote-line{display:block;overflow:hidden}.wow-quote .quote-line i{display:block;font-style:normal;transform:translateY(var(--quote-shift,0%));transition:transform .12s linear}
+@media(max-width:720px){.career-stage,.toolkit-grid{grid-template-columns:1fr;gap:0}.career-art{min-height:225px;height:clamp(235px,69vw,365px)}.career-details{padding:20px 0 24px}.career-details h3{font-size:43px;margin:10px 0 5px}.career-tags{margin:17px 0 10px}.career-select button{padding:13px 7px}.career-select button small{font-size:9px}.career-select button strong{font-size:13px}.toolkit-visual{min-height:0;height:clamp(240px,72vw,360px)}.toolkit-visual svg{height:100%}.tech-core strong{font-size:49px}.toolkit-selector{padding-top:9px}.toolkit-tabs button{font-size:11px;padding:12px 9px}.tech-list button{padding:10px;min-height:69px;gap:10px}.tech-evidence{min-height:95px}.visual-process{margin-top:43px}.process-rail button{font-size:12px}.process-rail button .process-symbol{width:45px;height:45px;font-size:19px}.process-rail:before{top:22px}.process-description{font-size:13px;min-height:80px}.wow-heading h2{will-change:auto}}
+@media(prefers-reduced-motion:reduce){.career-art .signal,.career-art .pulse,.toolkit-visual .orbit{animation:none!important}.wow-heading h2,.wow-quote .quote-line i{transform:none!important}.career-art.change svg,.process-description.change{animation:none!important}}
